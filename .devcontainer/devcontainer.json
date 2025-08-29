@@ -1,0 +1,22 @@
+{
+  "name": "Go + DooD (with memory)",
+  "image": "mcr.microsoft.com/devcontainers/go:1-1.24-bookworm",
+  "features": {
+    "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {}
+  },
+  "runArgs": [
+    "--memory=4g",
+    "--cpus=2",
+    "--network=twilo_interview_assignment_default"
+  ],
+  "forwardPorts": [8080, 6379],
+  "postCreateCommand": "go mod tidy",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "golang.go",
+        "ms-azuretools.vscode-docker"
+      ]
+    }
+  }
+}

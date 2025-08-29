@@ -1,0 +1,21 @@
+services:
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    command: ["redis-server", "--appendonly", "no"]
+
+  app:
+    build:
+      context: .
+      args:
+        SERVER_PKG: ./server
+    depends_on:
+      - redis
+    environment:
+      REDIS_ADDR: "redis:6379"
+      THRESHOLD: "10"
+      WINDOW_HOURS: "1"
+      COUNT_TTL_HOURS: "48"
+    ports:
+      - "8080:8080"
